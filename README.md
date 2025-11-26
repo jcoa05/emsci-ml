@@ -1,4 +1,4 @@
-# Predicting motor recovery after apinal cord injury using a stacked ensemble
+# Predicting motor recovery after spinal cord injury using a stacked ensemble
 ![R](https://img.shields.io/badge/R-4.5.1-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Active-orange)
