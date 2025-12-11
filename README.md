@@ -4,7 +4,7 @@
 ![Status](https://img.shields.io/badge/Status-Active-orange)
 
 ## Overview
-This project develops a supervised machine learning model to predict 12-month motor recovery outcomes for individuals with spinal cord injury (SCI). Using data collected during the first 30 days post-injury, the model estimates the International Standards for Neurological Classification of Spinal Cord Injury (ISNCSCI) total motor score at 12 months. View the full rendered project page here: **https://jcoa05.github.io/emsci-ml/**
+This project develops a supervised machine learning model to predict 12-month motor recovery outcomes for individuals with spinal cord injury (SCI). Using data collected during the first 30 days post-injury, the model estimates the International Standards for Neurological Classification of Spinal Cord Injury (ISNCSCI) total motor score at 12 months. [View the full rendered project page here](https://jcoa05.github.io/emsci-ml/)
 
 ## Objective
 Predict the ISNCSCI total motor score (0-100) at 12 months post-injury using early clinical data, leveraging stacked ensemble learning for optimal predictive performance.
