@@ -1,8 +1,8 @@
 # %% [markdown]
 # # Stacked Ensemble Learning: Python Migration
-# 
-# Migrating clinical ML workflow from tidymodels to scikit-learn.
-# Target: `motor_score_12m` (continuous), grouped by `center_id`.
+
+# Migrating SCI ML workflow from tidymodels to scikit-learn
+# Target: `motor_score_12m` (continuous), grouped by `center_id`
 
 # %%
 import numpy as np
