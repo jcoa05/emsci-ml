@@ -1,7 +1,5 @@
 # %% [markdown]
-# # Stacked Ensemble Learning: Python Migration
-
-# Migrating SCI ML workflow from tidymodels to scikit-learn
+# # Stacked Ensemble Learning: Migrating from R to python
 # Target: `motor_score_12m` (continuous), grouped by `center_id`
 
 # %%
@@ -49,7 +47,6 @@ for key, value in PARAMS.items():
 
 # %%
 df = pd.read_csv("data.csv")
-
 print(f"Dataset: {df.shape[0]} observations, {df.shape[1]} variables")
 print(f"Outcome: motor_score_12m (range: {df['motor_score_12m'].min()} - {df['motor_score_12m'].max()})")
 print(f"Groups: center_id ({df['center_id'].nunique()} unique centers)")
@@ -72,7 +69,7 @@ print(f"Categorical: {categorical_cols}")
 # %% [markdown]
 # ## Preprocessing Pipeline
 # 
-# Equivalent to tidymodels recipe: `step_dummy()` + `step_normalize()` + `step_zv()`
+# Equivalent to tidymodels recipe: step_dummy() + step_normalize() + step_zv()
 
 # %%
 numeric_transformer = Pipeline(steps=[
@@ -80,7 +77,7 @@ numeric_transformer = Pipeline(steps=[
 ])
 
 categorical_transformer = Pipeline(steps=[
-    # drop='first' matches step_dummy(one_hot = FALSE) reference coding
+    # drop='first' matches step_dummy(one_hot = FALSE) reference coding afaik
     ('onehot', OneHotEncoder(drop='first', sparse_output=False, handle_unknown='ignore'))
 ])
 
@@ -95,9 +92,9 @@ preprocessor = ColumnTransformer(
 print("Preprocessing pipeline defined.")
 
 # %% [markdown]
-# ## Cross-Validation Strategy
+# ## CV strategy
 # 
-# GroupKFold doesn't support repeats natively, so implementing manually.
+# GroupKFold doesn't support repeats natively, so implementing manually (need to double check)
 
 # %%
 def create_grouped_cv_splits(X, y, groups, n_splits=5, n_repeats=3, random_state=123):
@@ -145,7 +142,7 @@ for split in cv_splits[:3]:
     print(f"  Repeat {split['repeat']}, Fold {split['fold']}: overlap = {len(overlap)} (should be 0)")
 
 # %% [markdown]
-# ## Hyperparameter Grids
+# ## Hyperparameter grids
 
 # %%
 np.random.seed(RANDOM_STATE)
@@ -355,7 +352,7 @@ print(f"  RMSE: {best_xgb['rmse_mean']:.4f} (±{best_xgb['rmse_std']:.4f})")
 print(f"  R²: {best_xgb['rsq_mean']:.4f}")
 
 # %% [markdown]
-# ## Results Summary
+# ## Results summary
 
 # %%
 print("=" * 50)
@@ -441,5 +438,5 @@ print("PHASE 5 COMPLETE")
 print("=" * 50)
 print("Base learner training finished. Ready for stacking phase.")
 
-# TODO: Add PyTorch neural network as third base learner.
-# Sticking to sklearn-compatible models for now to get the pipeline working.
+# TO-DO: Add PyTorch neural network as third base learner, but encountering issues
+# Sticking to sklearn-compatible models for now to get the pipeline working fully
